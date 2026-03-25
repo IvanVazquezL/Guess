@@ -1,6 +1,7 @@
 import random
 from utils.loader import load_words
 from game.game import Game
+from bot.bot import Bot
 
 def main():
     words = load_words("data/words.txt")
@@ -8,7 +9,17 @@ def main():
 
     game = Game(solution, words)
 
+    print(f"Solution: {solution}")
+
+    bot = Bot(words)
+    
     while not game.is_over():
+        guess = bot.next_guess(game.history)
+        print(f"Bot plays: {guess}")
+
+        result = game.guess(guess)
+        print(result)
+        '''
         guess = input("Ingresa palabra: ")
         
         try:
@@ -21,6 +32,7 @@ def main():
         print("Ganaste")
     else:
         print(f"Perdiste. Era: {solution}")
+        '''
 
 if __name__ == "__main__":
     main()
